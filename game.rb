@@ -49,22 +49,22 @@ class Game
 
   def display
     system('clear')
-    puts "======================================"
-    puts "   HELLO #{@player.name.upcase}, WELCOME TO FREECELL"
-    puts "======================================"
+    puts "=============================================="
+    puts "        HELLO #{@player.name.upcase}, WELCOME TO FREECELL"
+    puts "=============================================="
 
     puts "Foundations              FreeCells"
     @foundations.each do |k,v|
       if !@foundations[k].empty?
         print "["+@foundations[k].last.to_s+"]"
       else
-        print "[ ] "
+        print "[  ] "
       end
     end
     print "     "
     @free_cells.rows.each do |card|
       if card.empty?
-        print "[ ] "
+        print "[  ] "
       else
         print "["+card.first.to_s+"]"
       end
@@ -77,9 +77,9 @@ class Game
     while i < @tableau.rows.length
       @tableau.rows.each do |row|
         if row[i].nil?
-          print "     "
+          print "      "
         else
-          print row[i].to_s + "  "
+          print row[i].to_s + "   "
         end
       end
       i += 1
