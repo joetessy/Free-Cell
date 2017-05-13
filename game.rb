@@ -1,3 +1,4 @@
+require 'byebug'
 require_relative 'tableau'
 require_relative 'player'
 
@@ -13,8 +14,10 @@ class Game
   end
 
   def tableau_move(start_row, end_row)
+    # debugger
     if start_row.last.color != end_row.last.color && start_row.last.rank == end_row.last.rank - 1 || start_row.empty?
       end_row.push(start_row.pop)
+    # debugger
     else
       raise 'Invalid move, card must be a different color and have one less value'
     end
@@ -70,11 +73,16 @@ class Game
     puts ""
     puts ""
     puts ""
-    @tableau.rows.each_index do |row|
-      # debugger
-      @tableau[row].each do |card|
-        print card.to_s + "  "
+    i = 0
+    while i < @tableau.rows.length
+      @tableau.rows.each do |row|
+        if row[i].nil?
+          print "     "
+        else
+          print row[i].to_s + "  "
+        end
       end
+      i += 1
       print "\n"
     end
     puts ""
@@ -122,6 +130,9 @@ class Game
       if move_to[0...-1] == "TAB"
         puts "Moving from Free Cell ##{move_from[-1]} to Tableau row #{move_to[-1]}"
         tableau_move(@free_cells[move_from[-1].to_i], @tableau[move_to[-1].to_i])
+      elsif move_to[0..-1] == "FOUND"
+        puts "Moving from Free Cell##{move_from[-1]} to Foundation row #{move_to[-1]}"
+        foundation_move(@free_cells[move_from[-1].to_i])
       end
     end
   end
@@ -130,11 +141,15 @@ class Game
     until @tableau.rows.all?{|row| row.empty?}
       take_turn
     end
+    system('clear')
+    display
+    puts "FUCK OMG U WON" * 1000
   end
 
 end
 
 if __FILE__ == $PROGRAM_NAME
+  system('clear')
   print "Enter your name please: "
   player = Player.new(gets.chomp)
   game = Game.new(player)
