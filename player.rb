@@ -13,7 +13,7 @@ class Player
     puts "FOUND #(0-3) for moving a tableau card"
     puts ""
 
-    gets.chomp
+    gets.chomp.upcase
   end
 
 
