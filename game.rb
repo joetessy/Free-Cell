@@ -94,10 +94,14 @@ class Game
     begin
     system('clear')
     display
+    puts ""
+    puts ""
     puts "WHERE ARE YOU MOVING FROM"
     move_from = @player.prompt
     system('clear')
     display
+    puts ""
+    puts ""
     puts "WHERE ARE YOU MOVING TO"
     puts "IF YOU ARE MOVING TO A FOUNDATION OR FREE CELL, DON'T INCLUDE A NUMBER"
     move_to = @player.prompt
