@@ -14,10 +14,8 @@ class Game
   end
 
   def tableau_move(start_row, end_row)
-    # debugger
     if start_row.last.color != end_row.last.color && start_row.last.rank == end_row.last.rank - 1 || start_row.empty?
       end_row.push(start_row.pop)
-    # debugger
     else
       raise 'Invalid move, card must be a different color and have one less value'
     end
@@ -99,14 +97,14 @@ class Game
     move_from = @player.prompt
     system('clear')
     display
-    puts ""
     puts "WHERE ARE YOU MOVING TO"
     puts "IF YOU ARE MOVING TO A FOUNDATION OR FREE CELL, DON'T INCLUDE A NUMBER"
     move_to = @player.prompt
     puts ""
     handle_prompt(move_from, move_to)
     rescue
-      puts "you done fucked up give it another shot"
+      puts ""
+      sleep(2)
       retry
     end
     system('clear')
@@ -118,21 +116,27 @@ class Game
     if move_from[0...-1] == "TAB"
       if move_to[0...-1] == "TAB"
         puts "Moving from Tableau row #{move_from[-1]} to Tableau row #{move_to[-1]}"
-        tableau_move(@tableau[move_from[-1].to_i], @tableau[move_to[-1].to_i])
+        sleep(.5)
+        tableau_move(@tableau[move_from[-1].to_i - 1], @tableau[move_to[-1].to_i - 1])
       elsif move_to[0..-1] == "FREE"
         puts "Moving from Tableau row #{move_from[-1]} to Free Cell"
-        to_free_cell(@tableau[move_from[-1].to_i])
+        sleep(.5)
+        to_free_cell(@tableau[move_from[-1].to_i - 1])
       elsif move_to[0..-1] == "FOUND"
         puts "Moving from Tableau row #{move_from[-1]} to Foundation"
-        foundation_move(@tableau[move_from[-1].to_i])
+        sleep(.5)
+        foundation_move(@tableau[move_from[-1].to_i - 1])
       end
     elsif move_from[0...-1] == "FREE"
       if move_to[0...-1] == "TAB"
         puts "Moving from Free Cell ##{move_from[-1]} to Tableau row #{move_to[-1]}"
-        tableau_move(@free_cells[move_from[-1].to_i], @tableau[move_to[-1].to_i])
+        sleep(.5)
+        tableau_move(@free_cells[move_from[-1].to_i - 1], @tableau[move_to[-1].to_i - 1])
       elsif move_to[0..-1] == "FOUND"
+        debugger
         puts "Moving from Free Cell##{move_from[-1]} to Foundation row #{move_to[-1]}"
-        foundation_move(@free_cells[move_from[-1].to_i])
+        sleep(.5)
+        foundation_move(@free_cells[move_from[-1].to_i - 1])
       end
     end
   end

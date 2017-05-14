@@ -8,14 +8,11 @@ class Player
     puts ""
 
     puts "GIVE ME A"
-    puts "FREE  #(0-7) for moving a free cell card"
-    puts "TAB   #(0-3) for moving a tableau card"
-    puts "FOUND #(0-3) for moving a tableau card"
+    puts "TAB   #(1-8) for moving a tableau card"
+    puts "FREE  #(1-4) for moving a free cell card"
+    puts "FOUND for moving to a foundation card"
     puts ""
 
     gets.chomp.upcase
   end
-
-
-
 end
