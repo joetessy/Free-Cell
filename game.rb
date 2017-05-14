@@ -132,7 +132,6 @@ class Game
         sleep(0.5)
         tableau_move(@free_cells[move_from[-1].to_i - 1], @tableau[move_to[-1].to_i - 1])
       elsif move_to[0..-1] == "FOUND"
-        debugger
         puts "Moving from Free Cell##{move_from[-1]} to Foundation row #{move_to[-1]}"
         sleep(0.5)
         foundation_move(@free_cells[move_from[-1].to_i - 1])
