@@ -14,7 +14,9 @@ class Game
   end
 
   def tableau_move(start_row, end_row)
-    if start_row.last.color != end_row.last.color && start_row.last.rank == end_row.last.rank - 1 || start_row.empty?
+    if end_row.empty?
+      end_row.push(start_row.pop)
+    elsif start_row.last.color != end_row.last.color && start_row.last.rank == end_row.last.rank - 1
       end_row.push(start_row.pop)
     else
       raise StandardError.new('CARD MUST BE DIFF COLOR AND 1 LESS VALUE DAWG')
