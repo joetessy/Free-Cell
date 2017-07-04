@@ -19,7 +19,7 @@ class Game
     elsif start_row.last.color != end_row.last.color && start_row.last.rank == end_row.last.rank - 1
       end_row.push(start_row.pop)
     else
-      raise StandardError.new('CARD MUST BE DIFF COLOR AND 1 LESS VALUE DAWG')
+      raise StandardError.new('CARD MUST BE DIFF COLOR AND 1 LESS VALUE')
     end
   end
 
@@ -28,12 +28,12 @@ class Game
       if start_row.last.rank == 1
         @foundations[start_row.last.suit].push(start_row.pop)
       else
-        raise StandardError.new("THIS WONT FLY -- YOU NEED AN ACE DAWG")
+        raise StandardError.new("THIS WONT FLY -- YOU NEED AN ACE")
       end
     elsif start_row.last.rank == @foundations[start_row.last.suit].last.rank + 1
         @foundations[start_row.last.suit].push(start_row.pop)
     else
-      raise StandardError.new("THIS WONT FLY -- GOTTA INCREMENT THE SUIT BY ONE")
+      raise StandardError.new("THIS WONT FLY -- YOU MUST INCREMENT THE SUIT BY ONE")
     end
   end
 
